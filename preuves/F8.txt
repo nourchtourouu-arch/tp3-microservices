@@ -1,0 +1,48 @@
+=== F.8 PUT ===
+# PUT reussi (attendu 200, resultat 16.0)
+$ curl -s -i -X PUT -H Content-Type: application/json -d {"operateur":"produit","a":8,"b":2} http://localhost:8082/operations/1
+HTTP/1.1 200 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Mon, 02 Nov 2026 22:07:40 GMT
+
+{"a":8,"b":2,"id":1,"operateur":"produit","resultat":16.0}
+
+# GET apres PUT
+$ curl -s -i http://localhost:8082/operations/1
+HTTP/1.1 200 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Mon, 02 Nov 2026 22:07:40 GMT
+
+{"a":8,"b":2,"id":1,"operateur":"produit","resultat":16.0}
+
+# PUT id inconnu (attendu 404)
+$ curl -s -i -X PUT -H Content-Type: application/json -d {"operateur":"somme","a":1,"b":1} http://localhost:8082/operations/99
+HTTP/1.1 404 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Mon, 02 Nov 2026 22:07:40 GMT
+
+{"erreur":"Opération introuvable : 99"}
+
+# PUT division par 0 (attendu 400)
+$ curl -s -i -X PUT -H Content-Type: application/json -d {"operateur":"division","a":7,"b":0} http://localhost:8082/operations/1
+HTTP/1.1 400 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Mon, 02 Nov 2026 22:07:40 GMT
+Connection: close
+
+{"erreur":"Calcul impossible (division par 0 ?)"}
+
+# PUT operateur inconnu (attendu 400)
+$ curl -s -i -X PUT -H Content-Type: application/json -d {"operateur":"racine","a":9,"b":0} http://localhost:8082/operations/1
+HTTP/1.1 400 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Mon, 02 Nov 2026 22:07:40 GMT
+Connection: close
+
+{"erreur":"Opérateur inconnu : racine"}
+

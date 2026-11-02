@@ -1,13 +1,50 @@
-=== F.7 (calcul-service arrêté) ===
+=== F.7 (calcul-service arrete) ===
 # Test 8
 $ curl -s -i http://localhost:8082/operations
+HTTP/1.1 200 
+Content-Type: application/json
+Content-Length: 119
+Date: Mon, 02 Nov 2026 22:08:52 GMT
 
+[{"a":8,"b":2,"id":1,"operateur":"produit","resultat":16.0},{"a":7,"b":2,"id":2,"operateur":"division","resultat":3.5}]
 
 # Test 9
 $ curl -s -i http://localhost:8082/operations/1
+HTTP/1.1 200 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Mon, 02 Nov 2026 22:08:52 GMT
 
+{"a":8,"b":2,"id":1,"operateur":"produit","resultat":16.0}
 
 # Test 10
 $ curl -s -i -X POST -H Content-Type: application/json -d {"operateur":"produit","a":3,"b":4} http://localhost:8082/operations
+HTTP/1.1 503 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Mon, 02 Nov 2026 22:08:52 GMT
+Connection: close
 
+{"erreur":"calcul-service est indisponible"}
+
+# PUT avec calcul-service injoignable (attendu 503)
+$ curl -s -i -X PUT -H Content-Type: application/json -d {"operateur":"somme","a":1,"b":1} http://localhost:8082/operations/1
+HTTP/1.1 503 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Mon, 02 Nov 2026 22:08:52 GMT
+Connection: close
+
+{"erreur":"calcul-service est indisponible"}
+
+=== F.7 (calcul-service relance) ===
+# Test 10 renvoye (attendu 201, id 3)
+$ curl -s -i -X POST -H Content-Type: application/json -d {"operateur":"produit","a":3,"b":4} http://localhost:8082/operations
+HTTP/1.1 201 
+Location: http://localhost:8082/operations/3
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Mon, 02 Nov 2026 22:10:26 GMT
+
+{"a":3,"b":4,"id":3,"operateur":"produit","resultat":12.0}
 

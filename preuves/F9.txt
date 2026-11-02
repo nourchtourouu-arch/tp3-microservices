@@ -1,0 +1,24 @@
+=== F.9 DELETE ===
+# DELETE 1 (attendu 204)
+$ curl -s -i -X DELETE http://localhost:8082/operations/1
+HTTP/1.1 204 
+Date: Mon, 02 Nov 2026 22:10:26 GMT
+
+
+
+# GET 1 (attendu 404)
+$ curl -s -i http://localhost:8082/operations/1
+HTTP/1.1 404 
+Content-Length: 0
+Date: Mon, 02 Nov 2026 22:10:26 GMT
+
+
+
+# DELETE 1 (attendu 404)
+$ curl -s -i -X DELETE http://localhost:8082/operations/1
+HTTP/1.1 404 
+Content-Length: 0
+Date: Mon, 02 Nov 2026 22:10:26 GMT
+
+
+

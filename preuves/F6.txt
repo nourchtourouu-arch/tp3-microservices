@@ -2,46 +2,46 @@
 # Test 1
 $ curl -s -i -X POST -H Content-Type: application/json -d {"operateur":"somme","a":8,"b":2} http://localhost:8082/operations
 HTTP/1.1 201 
-Location: http://localhost:8082/operations/4
+Location: http://localhost:8082/operations/1
 Content-Type: application/json
 Transfer-Encoding: chunked
-Date: Mon, 02 Nov 2026 21:50:41 GMT
+Date: Mon, 02 Nov 2026 22:07:40 GMT
 
-{"a":8,"b":2,"id":4,"operateur":"somme","resultat":10.0}
+{"a":8,"b":2,"id":1,"operateur":"somme","resultat":10.0}
 
 # Test 2
 $ curl -s -i -X POST -H Content-Type: application/json -d {"operateur":"division","a":7,"b":2} http://localhost:8082/operations
 HTTP/1.1 201 
-Location: http://localhost:8082/operations/5
+Location: http://localhost:8082/operations/2
 Content-Type: application/json
 Transfer-Encoding: chunked
-Date: Mon, 02 Nov 2026 21:50:41 GMT
+Date: Mon, 02 Nov 2026 22:07:40 GMT
 
-{"a":7,"b":2,"id":5,"operateur":"division","resultat":3.5}
+{"a":7,"b":2,"id":2,"operateur":"division","resultat":3.5}
 
 # Test 3
 $ curl -s -i http://localhost:8082/operations
 HTTP/1.1 200 
 Content-Type: application/json
-Content-Length: 290
-Date: Mon, 02 Nov 2026 21:50:41 GMT
+Content-Length: 117
+Date: Mon, 02 Nov 2026 22:07:40 GMT
 
-[{"a":8,"b":2,"id":1,"operateur":"somme","resultat":10.0},{"a":8,"b":2,"id":2,"operateur":"somme","resultat":10.0},{"a":7,"b":2,"id":3,"operateur":"division","resultat":3.5},{"a":8,"b":2,"id":4,"operateur":"somme","resultat":10.0},{"a":7,"b":2,"id":5,"operateur":"division","resultat":3.5}]
+[{"a":8,"b":2,"id":1,"operateur":"somme","resultat":10.0},{"a":7,"b":2,"id":2,"operateur":"division","resultat":3.5}]
 
 # Test 4
 $ curl -s -i http://localhost:8082/operations/2
 HTTP/1.1 200 
 Content-Type: application/json
 Transfer-Encoding: chunked
-Date: Mon, 02 Nov 2026 21:50:41 GMT
+Date: Mon, 02 Nov 2026 22:07:40 GMT
 
-{"a":8,"b":2,"id":2,"operateur":"somme","resultat":10.0}
+{"a":7,"b":2,"id":2,"operateur":"division","resultat":3.5}
 
 # Test 5
 $ curl -s -i http://localhost:8082/operations/99
 HTTP/1.1 404 
 Content-Length: 0
-Date: Mon, 02 Nov 2026 21:50:41 GMT
+Date: Mon, 02 Nov 2026 22:07:40 GMT
 
 
 
@@ -50,7 +50,7 @@ $ curl -s -i -X POST -H Content-Type: application/json -d {"operateur":"division
 HTTP/1.1 400 
 Content-Type: application/json
 Transfer-Encoding: chunked
-Date: Mon, 02 Nov 2026 21:50:41 GMT
+Date: Mon, 02 Nov 2026 22:07:40 GMT
 Connection: close
 
 {"erreur":"Calcul impossible (division par 0 ?)"}
@@ -60,7 +60,7 @@ $ curl -s -i -X POST -H Content-Type: application/json -d {"operateur":"racine",
 HTTP/1.1 400 
 Content-Type: application/json
 Transfer-Encoding: chunked
-Date: Mon, 02 Nov 2026 21:50:41 GMT
+Date: Mon, 02 Nov 2026 22:07:40 GMT
 Connection: close
 
 {"erreur":"Opérateur inconnu : racine"}

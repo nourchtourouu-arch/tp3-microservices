@@ -9,7 +9,6 @@ Matière : Architecture MicroServices | Filière : MPSRCC1 | Faculté des Scienc
 | `calcul-service/` | Effectue les 4 calculs (ressource `/calcul`) | 8081 |
 | `historique-service/` | Enregistre les opérations (ressource `/operations`), appelle `calcul-service` par HTTP | 8082 |
 | `preuves/` | Sorties de `curl -i` de tous les tests | |
-| `captures/` | Capture des deux consoles (Tomcat started on port 8081 et 8082) | |
 
 ## 2. Lancer le projet (WSL, sans IntelliJ)
 
