@@ -1,0 +1,13 @@
+=== F.7 (calcul-service arrêté) ===
+# Test 8
+$ curl -s -i http://localhost:8082/operations
+
+
+# Test 9
+$ curl -s -i http://localhost:8082/operations/1
+
+
+# Test 10
+$ curl -s -i -X POST -H Content-Type: application/json -d {"operateur":"produit","a":3,"b":4} http://localhost:8082/operations
+
+
